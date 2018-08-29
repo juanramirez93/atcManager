@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reporte RCE" pageWidth="1008" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="968" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="3a2a3632-83e7-41b7-b427-08724af69c72">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="atc"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="340"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="653"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="Titles" forecolor="#DB110D" hTextAlign="Center" vTextAlign="Middle" pattern="" isBlankWhenNull="true" fontName="DejaVu Sans" isBold="true"/>
+	<style name="Fields" hTextAlign="Center" vTextAlign="Middle" fontName="DejaVu Sans Condensed"/>
+	<style name="Encabezado" mode="Transparent" forecolor="#DB110D" hTextAlign="Center" vTextAlign="Middle" isBlankWhenNull="true" fontName="DejaVu Sans" fontSize="26" isBold="true"/>
+	<parameter name="mesReporte" class="java.lang.Integer"/>
+	<parameter name="anioReporte" class="java.lang.Integer"/>
+	<parameter name="mesString" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT atc.movimiento.`anioFechaReporte`,
+	atc.movimiento.`mesFechaReporte`,
+	atc.empresa.nit,
+	atc.empresa.`razonSocial`,
+	atc.poliza.inicio,
+	atc.poliza.fin,
+	atc.poliza.valor,
+	atc.rce.`valorUrbanos`,
+	atc.poliza.numero,
+	atc.producto.urbanos,
+	atc.producto.modalidad,
+	Sum( atc.movimiento.cantidad)
+FROM atc.movimiento
+	INNER JOIN atc.producto ON 
+	 atc.movimiento.`ID_PRODUCTO` = atc.producto.`ID_PRODUCTO` 
+	INNER JOIN atc.empresa ON 
+	 atc.producto.`ID_EMPRESA` = atc.empresa.`ID_PERSONA` 
+	INNER JOIN atc.aaa ON 
+	 atc.aaa.`ID_PRODUCTO` = atc.producto.`ID_PRODUCTO` 
+	INNER JOIN atc.poliza ON 
+	 atc.poliza.`ID_POLIZA` = atc.aaa.`ID_RCE` 
+	INNER JOIN atc.rce ON 
+	 atc.rce.`ID_POLIZA` = atc.poliza.`ID_POLIZA` 
+WHERE 
+	 atc.movimiento.`mesFechaReporte` = '$P!{mesReporte}' 
+	 AND atc.movimiento.`anioFechaReporte` = '$P!{anioReporte}' 
+GROUP BY atc.movimiento.`anioFechaReporte`,
+	atc.movimiento.`mesFechaReporte`,
+	atc.producto.modalidad,
+	atc.producto.urbanos,
+	atc.empresa.`razonSocial`,
+	atc.empresa.nit
+UNION
+SELECT atc.movimiento.`anioFechaReporte`,
+	atc.movimiento.`mesFechaReporte`,
+	atc.empresa.nit,
+	atc.empresa.`razonSocial`,
+	atc.poliza.inicio,
+	atc.poliza.fin,
+	atc.poliza.valor,
+	atc.rce.`valorUrbanos`,
+	atc.poliza.numero,
+	atc.producto.urbanos,
+	atc.producto.modalidad,
+	Sum( atc.movimiento.cantidad)
+FROM atc.movimiento
+	INNER JOIN atc.producto ON 
+	 atc.movimiento.`ID_PRODUCTO` = atc.producto.`ID_PRODUCTO` 
+	INNER JOIN atc.empresa ON 
+	 atc.producto.`ID_EMPRESA` = atc.empresa.`ID_PERSONA` 
+	INNER JOIN atc.integral ON 
+	 atc.integral.`ID_PRODUCTO` = atc.producto.`ID_PRODUCTO` 
+	INNER JOIN atc.poliza ON 
+	 atc.poliza.`ID_POLIZA` = atc.integral.`ID_RCE` 
+	INNER JOIN atc.rce ON 
+	 atc.rce.`ID_POLIZA` = atc.poliza.`ID_POLIZA` 
+WHERE 
+	 atc.movimiento.`mesFechaReporte` = '$P!{mesReporte}' 
+	 AND atc.movimiento.`anioFechaReporte` = '$P!{anioReporte}' 
+GROUP BY atc.movimiento.`anioFechaReporte`,
+	atc.movimiento.`mesFechaReporte`,
+	atc.producto.modalidad,
+	atc.producto.urbanos,
+	atc.empresa.`razonSocial`,
+	atc.empresa.nit
+	UNION
+SELECT atc.movimiento.`anioFechaReporte`,
+	atc.movimiento.`mesFechaReporte`,
+	atc.empresa.nit,
+	atc.empresa.`razonSocial`,
+	atc.poliza.inicio,
+	atc.poliza.fin,
+	atc.poliza.valor,
+	atc.rce.`valorUrbanos`,
+	atc.poliza.numero,
+	atc.producto.urbanos,
+	atc.producto.modalidad,
+	Sum( atc.movimiento.cantidad)
+FROM atc.movimiento
+	INNER JOIN atc.producto ON 
+	 atc.movimiento.`ID_PRODUCTO` = atc.producto.`ID_PRODUCTO` 
+	INNER JOIN atc.empresa ON 
+	 atc.producto.`ID_EMPRESA` = atc.empresa.`ID_PERSONA` 
+	INNER JOIN atc.rceproduct ON 
+	 atc.rceproduct.`ID_PRODUCTO` = atc.producto.`ID_PRODUCTO` 
+	INNER JOIN atc.poliza ON 
+	 atc.poliza.`ID_POLIZA` = atc.rceproduct.`ID_RCE` 
+	INNER JOIN atc.rce ON 
+	 atc.rce.`ID_POLIZA` = atc.poliza.`ID_POLIZA` 
+WHERE 
+	 atc.movimiento.`mesFechaReporte` = '$P!{mesReporte}' 
+	 AND atc.movimiento.`anioFechaReporte` = '$P!{anioReporte}' 
+GROUP BY atc.movimiento.`anioFechaReporte`,
+	atc.movimiento.`mesFechaReporte`,
+	atc.producto.modalidad,
+	atc.producto.urbanos,
+	atc.empresa.`razonSocial`,
+	atc.empresa.nit
+	UNION
+SELECT atc.movimiento.`anioFechaReporte`,
+	atc.movimiento.`mesFechaReporte`,
+	atc.empresa.nit,
+	atc.empresa.`razonSocial`,
+	atc.poliza.inicio,
+	atc.poliza.fin,
+	atc.poliza.valor,
+	atc.rce.`valorUrbanos`,
+	atc.poliza.numero,
+	atc.producto.urbanos,
+	atc.producto.modalidad,
+	Sum( atc.movimiento.cantidad)
+FROM atc.movimiento
+	INNER JOIN atc.producto ON 
+	 atc.movimiento.`ID_PRODUCTO` = atc.producto.`ID_PRODUCTO` 
+	INNER JOIN atc.empresa ON 
+	 atc.producto.`ID_EMPRESA` = atc.empresa.`ID_PERSONA` 
+	INNER JOIN atc.rcetransporte ON 
+	 atc.rcetransporte.`ID_PRODUCTO` = atc.producto.`ID_PRODUCTO` 
+	INNER JOIN atc.poliza ON 
+	 atc.poliza.`ID_POLIZA` = atc.rcetransporte.`ID_RCE` 
+	INNER JOIN atc.rce ON 
+	 atc.rce.`ID_POLIZA` = atc.poliza.`ID_POLIZA` 
+WHERE 
+	 atc.movimiento.`mesFechaReporte` = '$P!{mesReporte}' 
+	 AND atc.movimiento.`anioFechaReporte` = '$P!{anioReporte}' 
+GROUP BY atc.movimiento.`anioFechaReporte`,
+	atc.movimiento.`mesFechaReporte`,
+	atc.producto.modalidad,
+	atc.producto.urbanos,
+	atc.empresa.`razonSocial`,
+	atc.empresa.nit]]>
+	</queryString>
+	<field name="anioFechaReporte" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="anioFechaReporte"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movimiento"/>
+	</field>
+	<field name="mesFechaReporte" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="mesFechaReporte"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movimiento"/>
+	</field>
+	<field name="nit" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="nit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresa"/>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="razonSocial"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresa"/>
+	</field>
+	<field name="inicio" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="inicio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="poliza"/>
+	</field>
+	<field name="fin" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="poliza"/>
+	</field>
+	<field name="valor" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="valor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="poliza"/>
+	</field>
+	<field name="valorUrbanos" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="valorUrbanos"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rce"/>
+	</field>
+	<field name="numero" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="numero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="poliza"/>
+	</field>
+	<field name="urbanos" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="urbanos"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="producto"/>
+	</field>
+	<field name="modalidad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="modalidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="producto"/>
+	</field>
+	<field name="Sum( atc.movimiento.cantidad)" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="Sum( atc.movimiento.cantidad)"/>
+	</field>
+	<variable name="primaUrbanos" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{valorUrbanos}*$F{urbanos}]]></variableExpression>
+	</variable>
+	<variable name="primaTrayectos" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{valor}*$F{Sum( atc.movimiento.cantidad)}]]></variableExpression>
+	</variable>
+	<variable name="primaTotal" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{primaTrayectos}+$V{primaUrbanos}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="85" splitType="Stretch">
+			<staticText>
+				<reportElement style="Encabezado" x="379" y="0" width="211" height="46" uuid="f672cccf-e055-4b10-848e-5c958b232459"/>
+				<text><![CDATA[REPORTE RCE]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Titles" x="446" y="55" width="100" height="30" uuid="c5730d45-ffbe-4329-bad8-4608e75f6101"/>
+				<textFieldExpression><![CDATA[$P{mesString} + "/" + $P{anioReporte}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.spreadsheet.SpreadsheetLayout"/>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="0" y="0" width="39" height="31" uuid="32d38ca9-d1ab-4282-9e40-44ebbf6a03cc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5d732775-1bc0-4120-bf8f-d50d82d8b2d3"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[AÑO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="39" y="0" width="39" height="31" uuid="af336e3e-3186-4384-8b4c-2d53f99aabe2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="957fa849-2d94-4e48-b9cb-70bfce3fefb4"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[MES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="78" y="0" width="62" height="31" uuid="7ad21f97-2362-41d0-b131-2c1237151244">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fcb68000-c98b-4dc6-8877-ffa72def20f5"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="140" y="0" width="130" height="31" uuid="fe6bc1cb-3f7d-4b5a-b12f-9a5a044057b0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e9ac8f2-0127-46c2-83f5-8800478e9c11"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="270" y="0" width="60" height="31" uuid="f4c99628-cae2-47a0-84ae-621936ca0030">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="416579a6-41f3-465c-bf4a-dabef67b8c2e"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[MODALIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="330" y="0" width="62" height="31" uuid="9b4fa50f-2b4e-455a-89d4-f273df1a5670">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="82ad28a5-5397-439d-938d-22b27468c3b4"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[POLIZA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="392" y="0" width="48" height="31" uuid="7928a5cc-65e6-4ddc-8ab4-bd38fa1e1391">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6f9b602f-81a5-4803-bccd-85d9f868976e"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[INICIO VIGENCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="440" y="0" width="50" height="31" uuid="59774212-9529-4bca-955f-f83359ec15cd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8409d52e-73de-4c8d-ae17-3e5660fd040b"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FIN VIGENCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="490" y="0" width="62" height="31" uuid="f2b30cea-b5e6-4d4e-9483-631c3d6683ed">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf1ffd6c-b269-4126-adb9-d7a83d41a73b"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD TRAYECTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="552" y="0" width="62" height="31" uuid="b3fce194-db59-469a-85d5-249e867f073c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f91e7b2e-6036-482c-b876-2d3b098a13d7"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[VALOR UNITARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="614" y="0" width="62" height="31" uuid="ec31e1ad-8643-4c76-9edf-2412675e90dd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7704b471-7ada-4c38-ae78-bd10cad92e2c"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD URBANOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="FixRelativeToBottom" x="676" y="0" width="53" height="31" uuid="72ca27dd-c801-46d9-b835-9c50004defbd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9d77a6cb-17bc-4957-b011-6de6b5949da7"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[VALOR UNITARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" x="730" y="0" width="80" height="30" uuid="c9f08d46-37e4-43de-be17-9f775933f890"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PRIMA TRAYECTOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" x="810" y="0" width="70" height="30" uuid="90b02d5e-08cc-4139-a89e-3f488f296947"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PRIMA URBANOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" x="879" y="0" width="88" height="30" uuid="0ad50efc-6489-4e2c-a6a2-2fe600adae50"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PRIMA TOTAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="56" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.spreadsheet.SpreadsheetLayout"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Fields" x="0" y="0" width="39" height="56" uuid="cbcf9529-857d-4ef8-af64-2d2711edf5ad">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5d732775-1bc0-4120-bf8f-d50d82d8b2d3"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{anioFechaReporte}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Fields" x="39" y="0" width="39" height="56" uuid="a2bd74df-1e63-49f3-8801-3f8d9d2a4b3f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="957fa849-2d94-4e48-b9cb-70bfce3fefb4"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mesFechaReporte}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Fields" x="78" y="0" width="62" height="56" uuid="2a19f3bb-aaef-4db4-88fa-453ab3a564ba">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fcb68000-c98b-4dc6-8877-ffa72def20f5"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nit}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Fields" x="140" y="0" width="130" height="56" uuid="1dc1f607-7ac9-413c-a539-bbce6525c897">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e9ac8f2-0127-46c2-83f5-8800478e9c11"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Fields" x="270" y="0" width="60" height="56" uuid="e50cd268-cba9-492f-9166-52347269eacd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="416579a6-41f3-465c-bf4a-dabef67b8c2e"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modalidad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Fields" x="330" y="0" width="62" height="56" uuid="ff4bba7e-1dda-4124-b777-fcfb6fa0b719">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="82ad28a5-5397-439d-938d-22b27468c3b4"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="M/d/yy" isBlankWhenNull="true">
+				<reportElement style="Fields" x="392" y="0" width="48" height="56" uuid="aee2707d-e8f1-4a71-bd75-e81b4fbac051">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6f9b602f-81a5-4803-bccd-85d9f868976e"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inicio}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="M/d/yy" isBlankWhenNull="true">
+				<reportElement style="Fields" x="440" y="0" width="50" height="56" uuid="f17bcadf-e537-4c96-b15c-90f3700e127f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8409d52e-73de-4c8d-ae17-3e5660fd040b"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fin}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Fields" x="490" y="0" width="62" height="56" uuid="7f4049ec-0a47-41d0-84f1-54e3de6b6260">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cf1ffd6c-b269-4126-adb9-d7a83d41a73b"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Sum( atc.movimiento.cantidad)}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Fields" x="552" y="0" width="62" height="56" uuid="ed71d532-14ac-4dff-aa56-fb93825ac2e1">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f91e7b2e-6036-482c-b876-2d3b098a13d7"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Fields" x="614" y="0" width="62" height="56" uuid="81206628-0aa1-491e-8be2-3ef4d7ee4c4d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7704b471-7ada-4c38-ae78-bd10cad92e2c"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{urbanos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Fields" x="676" y="0" width="53" height="56" uuid="91657ef2-17bd-44b4-a116-6a16c2ae0d35">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9d77a6cb-17bc-4957-b011-6de6b5949da7"/>
+				</reportElement>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorUrbanos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,###.###;(#,###.###-)" isBlankWhenNull="true">
+				<reportElement style="Fields" x="729" y="0" width="80" height="56" uuid="070bfe5f-88e6-4f7d-96c8-791418f00963"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{primaTrayectos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,###.###;(#,###.###-)" isBlankWhenNull="true">
+				<reportElement style="Fields" x="809" y="0" width="70" height="56" uuid="f545fb48-bb84-4312-8164-197c17c9e289"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{primaUrbanos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,###.###;(#,###.###-)" isBlankWhenNull="true">
+				<reportElement style="Fields" x="879" y="0" width="88" height="56" uuid="f4d3d09c-1386-41e7-9822-aa62c1feb01b"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{primaTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="490" y="10" width="160" height="30" uuid="0754b794-f452-481b-bb73-872b4f5c69bd"/>
+				<text><![CDATA[Creado por:
+JUAN SEBASTIÁN RAMÍREZ]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

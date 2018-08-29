@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="com.jaspersoft.studio.editor.gef.decorator.csv.ColumnNamesSettingDialog">
+		<item value="341" key="DIALOG_WIDTH"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="205" key="dialogY"/>
+		<item value="538" key="dialogX"/>
+		<item value="288" key="dialogHeight"/>
+		<item value="341" key="dialogWidth"/>
+		<item value="288" key="DIALOG_HEIGHT"/>
+		<item value="487" key="DIALOG_X_ORIGIN"/>
+		<item value="178" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="com.jaspersoft.studio.model.image.command.dialog.ImageCreationDialog">
+		<item value="634" key="DIALOG_WIDTH"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="27" key="dialogY"/>
+		<item value="391" key="dialogX"/>
+		<item value="607" key="dialogHeight"/>
+		<item value="634" key="dialogWidth"/>
+		<item value="607" key="DIALOG_HEIGHT"/>
+		<item value="340" key="DIALOG_X_ORIGIN"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="com.jaspersoft.studio.data.sql.dialogs.EditExpressionDialog">
+		<item value="801" key="DIALOG_WIDTH"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="355" key="dialogY"/>
+		<item value="424" key="dialogX"/>
+		<item value="354" key="dialogHeight"/>
+		<item value="801" key="dialogWidth"/>
+		<item value="354" key="DIALOG_HEIGHT"/>
+		<item value="373" key="DIALOG_X_ORIGIN"/>
+		<item value="328" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="com.jaspersoft.studio.data.sql.dialogs.EditFromTableDialog">
+		<item value="512" key="DIALOG_WIDTH"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="305" key="dialogY"/>
+		<item value="452" key="dialogX"/>
+		<item value="138" key="dialogHeight"/>
+		<item value="512" key="dialogWidth"/>
+		<item value="138" key="DIALOG_HEIGHT"/>
+		<item value="401" key="DIALOG_X_ORIGIN"/>
+		<item value="278" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog">
+		<item value="1315" key="DIALOG_WIDTH"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="27" key="dialogY"/>
+		<item value="51" key="dialogX"/>
+		<item value="743" key="dialogHeight"/>
+		<item value="1315" key="dialogWidth"/>
+		<item value="743" key="DIALOG_HEIGHT"/>
+		<item value="0" key="DIALOG_X_ORIGIN"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="com.jaspersoft.studio.property.color.chooser.ColorDialog">
+		<item value="689" key="DIALOG_WIDTH"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="47" key="dialogY"/>
+		<item value="672" key="dialogX"/>
+		<item value="518" key="dialogHeight"/>
+		<item value="689" key="dialogWidth"/>
+		<item value="518" key="DIALOG_HEIGHT"/>
+		<item value="621" key="DIALOG_X_ORIGIN"/>
+		<item value="20" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="com.jaspersoft.studio.property.descriptor.expression.dialog.JRExpressionEditor">
+		<item value="750" key="DIALOG_WIDTH"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="27" key="dialogY"/>
+		<item value="333" key="dialogX"/>
+		<item value="680" key="dialogHeight"/>
+		<item value="750" key="dialogWidth"/>
+		<item value="680" key="DIALOG_HEIGHT"/>
+		<item value="282" key="DIALOG_X_ORIGIN"/>
+		<item value="0" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="com.jaspersoft.studio.data.sql.dialogs.JoinFromTableDialog">
+		<item value="595" key="DIALOG_WIDTH"/>
+		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
+		<item value="294" key="dialogY"/>
+		<item value="411" key="dialogX"/>
+		<item value="155" key="dialogHeight"/>
+		<item value="595" key="dialogWidth"/>
+		<item value="155" key="DIALOG_HEIGHT"/>
+		<item value="360" key="DIALOG_X_ORIGIN"/>
+		<item value="267" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

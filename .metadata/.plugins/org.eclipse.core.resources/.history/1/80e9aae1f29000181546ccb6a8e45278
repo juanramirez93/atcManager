@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reintgro RCE" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0526ad71-0eab-49d0-bd8f-6be813018cb3">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="atc"/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[YXRjLmFhYSAsNzI5LDQ4NywzODUxZmE4My04NzRkLTQ0OGItODY0My0yZjY3ODVhM2NiZDM7YXRj
+LnJjZSAsNDEwLDYxNCxmODg5ZGJlYi0xZWRkLTQ5OWEtYTNlOC1iNGE1ZDVmN2YyMTA7YXRjLmVt
+cHJlc2EgLDQxMCwyNDgsM2E5OGFjMTktMTRlMy00NzM2LWFmODktZTJkYmUxZjY2NTg3O2F0Yy5w
+cm9kdWN0b19jb21pc2lvbiAsNDEwLDc2Myw3ODVlYzljMC0zNDUzLTRlN2YtYjQyOC04NjI3OTlk
+YjQxOTQ7YXRjLnByb2R1Y3RvICwyMjcsMzY3LDczYTg5ZTBlLWVlMTUtNGJlMC04MjEzLWI0OWY0
+MzlkZDhlMjthdGMuY29taXNpb24gLDcyOSw3MjAsN2YwMDFmMTctODEyMi00NTI1LWI1YzgtMzFm
+YmU5ZGY4NzJiO2F0Yy5tb3ZpbWllbnRvICwxNSwyNTUsYTFlMDQ4NWQtOGNjYi00ZjJlLTk3ODct
+NWU5OTkxY2MwOTBjO2F0Yy5wb2xpemEgLDQxMCwxNSw0ZTAzODE4Ny1hZWI0LTRmMzEtOTczYS1m
+YjhjNjlmMDg5NGI7YXRjLmVtcGxlYWRvICw5NTYsNjkyLDY2OTM2NDczLTAwMzEtNDQxNi1iMGQ4
+LTRlZTgxYTRmZjNhNjs=]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="270"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="723"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="714"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="271"/>
+	<style name="Titles" forecolor="#DB110D" hTextAlign="Center" vTextAlign="Middle" pattern="" isBlankWhenNull="true" fontName="DejaVu Sans" isBold="true"/>
+	<style name="Fields" hTextAlign="Center" vTextAlign="Middle" fontName="DejaVu Sans Condensed"/>
+	<style name="Title" forecolor="#DB110D" hTextAlign="Center" vTextAlign="Middle" isBlankWhenNull="true" fontName="DejaVu Sans" fontSize="26" isBold="true"/>
+	<parameter name="Empleado" class="java.lang.Integer" nestedType=""/>
+	<queryString>
+		<![CDATA[SELECT atc.movimiento.cantidad,
+	atc.empresa.nit,
+	atc.empresa.`razonSocial`,
+	atc.poliza.valor,
+	atc.comision.comision,
+	atc.empleado.abreviatura,
+	atc.movimiento.`pagoRCE`,
+	atc.rce.`comisionATC`,
+	atc.comision.`ID_EMPLEADO`,
+	atc.empleado.apellidos,
+	atc.empleado.cedula,
+	atc.empleado.nombres
+FROM atc.movimiento
+	INNER JOIN atc.producto ON 
+	 atc.movimiento.`ID_PRODUCTO` = atc.producto.`ID_PRODUCTO` 
+	INNER JOIN atc.empresa ON 
+	 atc.producto.`ID_EMPRESA` = atc.empresa.`ID_PERSONA` 
+	INNER JOIN atc.aaa ON 
+	 atc.aaa.`ID_PRODUCTO` = atc.producto.`ID_PRODUCTO` 
+	INNER JOIN atc.poliza ON 
+	 atc.poliza.`ID_POLIZA` = atc.aaa.`ID_RCE` 
+	INNER JOIN atc.producto_comision ON 
+	 atc.producto_comision.`Producto_ID_PRODUCTO` = atc.aaa.`ID_PRODUCTO` 
+	INNER JOIN atc.comision ON 
+	 atc.producto_comision.`comisionRCE_ID_COMISION` = atc.comision.`ID_COMISION` 
+	INNER JOIN atc.empleado ON 
+	 atc.comision.`ID_EMPLEADO` = atc.empleado.`ID_PERSONA` 
+	INNER JOIN atc.rce ON 
+	 atc.rce.`ID_POLIZA` = atc.aaa.`ID_RCE` 
+WHERE 
+	 atc.comision.`ID_EMPLEADO` = $P!{Empleado}]]>
+	</queryString>
+	<field name="cantidad" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="cantidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movimiento"/>
+	</field>
+	<field name="nit" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="nit"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresa"/>
+	</field>
+	<field name="razonSocial" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="razonSocial"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empresa"/>
+	</field>
+	<field name="valor" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="valor"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="poliza"/>
+	</field>
+	<field name="comision" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="comision"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="comision"/>
+	</field>
+	<field name="abreviatura" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="abreviatura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empleado"/>
+	</field>
+	<field name="pagoRCE" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="pagoRCE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="movimiento"/>
+	</field>
+	<field name="comisionATC" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="comisionATC"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="rce"/>
+	</field>
+	<field name="ID_EMPLEADO" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="ID_EMPLEADO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="comision"/>
+	</field>
+	<field name="apellidos" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="apellidos"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empleado"/>
+	</field>
+	<field name="cedula" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="cedula"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empleado"/>
+	</field>
+	<field name="nombres" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombres"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="empleado"/>
+	</field>
+	<variable name="Reintegro" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{cantidad}*$F{valor}*$F{comisionATC}*$F{comision}/10000]]></variableExpression>
+	</variable>
+	<variable name="GananciaATC" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{cantidad}*$F{valor}*$F{comisionATC}/100]]></variableExpression>
+	</variable>
+	<variable name="Suma reint" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$V{Reintegro}]]></variableExpression>
+	</variable>
+	<variable name="suma ganancia" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$V{GananciaATC}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="91" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.spreadsheet.SpreadsheetLayout"/>
+			<textField>
+				<reportElement style="Titles" x="280" y="49" width="90" height="20" uuid="9fe89aa1-a3f0-4035-8da5-78caa729b4c5"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Titles" positionType="Float" x="187" y="49" width="90" height="20" uuid="f436886b-cdb9-41ae-98bf-b3ca240c0e3c"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.###;(#,##0.###-)">
+				<reportElement style="Titles" x="220" y="69" width="133" height="20" uuid="a0273695-5525-4f17-b2c9-39a8fa4bbf55"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Title" positionType="FixRelativeToBottom" x="116" y="0" width="340" height="54" forecolor="#DB110D" uuid="0ef37c46-d5b6-4603-a1c3-e8bf52685aa4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="DejaVu Sans" size="26" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["REINT. SEGUROS RCE"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="2" width="85" height="85" uuid="14936e80-cf75-4dad-b218-cc0d6c0a4633"/>
+				<imageExpression><![CDATA["/home/juanramirez/eclipse-workspace/ATCManager/images/logoCompletoCuadrado.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+			<staticText>
+				<reportElement style="Titles" positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="97" height="25" uuid="88158713-df9f-4cff-a36a-a7003dda1f4f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="71461bf7-252b-4934-a970-8daae11bb215"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[NIT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="Float" stretchType="RelativeToTallestObject" x="97" y="0" width="95" height="25" uuid="3ec4a112-3253-4c9f-b6d7-87bdd4ce4fa2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="91b7bf6a-73db-44b5-ab77-3fdf88416cd2"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="Float" stretchType="RelativeToTallestObject" x="192" y="0" width="95" height="25" uuid="f713375a-85e1-448b-a386-34b642d8c16e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4a279d71-0613-4638-b39c-e8ac30f3869e"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[FECHA DE PAGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="Float" stretchType="RelativeToTallestObject" x="287" y="0" width="95" height="25" uuid="9c484d8c-b9e4-4414-a95b-02d5c501c8d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[GANANCIA ATC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" positionType="Float" stretchType="RelativeToTallestObject" x="382" y="0" width="95" height="25" uuid="1be0452f-27ee-44c5-8013-194d61e5bf94">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9b3222bf-cd4e-4d48-b112-3297761ed1c5"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[%]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Titles" x="477" y="0" width="95" height="25" uuid="ae6cc2e9-7c95-4b49-b803-a2a166322150"/>
+				<text><![CDATA[REINTEGRO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.spreadsheet.SpreadsheetLayout"/>
+			<textField pattern="#,##0.###;(#,##0.###-)">
+				<reportElement style="Fields" stretchType="RelativeToBandHeight" x="0" y="0" width="97" height="30" uuid="dc021107-cffb-485b-9cc3-a747e4ce27ad">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="71461bf7-252b-4934-a970-8daae11bb215"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Fields" x="97" y="0" width="95" height="30" uuid="23780f95-d865-4951-bf14-1bd37c53d89b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="91b7bf6a-73db-44b5-ab77-3fdf88416cd2"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{razonSocial}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Fields" x="192" y="0" width="95" height="30" uuid="4262f5b4-e88f-45c3-814b-d8db9e1e27d8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4a279d71-0613-4638-b39c-e8ac30f3869e"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pagoRCE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤#,##0.##;¤-##0.##" isBlankWhenNull="true">
+				<reportElement key="" style="Fields" positionType="Float" x="287" y="0" width="95" height="30" uuid="81a4f425-881d-44d3-9474-0d9f4496431e">
+					<property name="com.jaspersoft.studio.element.name" value="Ganancia ATC"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{GananciaATC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Fields" x="382" y="0" width="95" height="30" uuid="0f1ec0e7-6a2c-4ab0-931c-fb79ca60fc14">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9b3222bf-cd4e-4d48-b112-3297761ed1c5"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{comision}+"%"]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.###;¤(#,##0.###-)">
+				<reportElement style="Fields" x="477" y="0" width="95" height="30" uuid="8d6b560c-40d5-4db6-a935-90aedb7c6896"/>
+				<textFieldExpression><![CDATA[$V{Reintegro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="35" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="¤#,##0.###;¤(#,##0.###-)">
+				<reportElement style="Titles" x="477" y="0" width="95" height="30" uuid="38651383-91f4-48af-9509-900b7f95f9d2"/>
+				<textFieldExpression><![CDATA[$V{Suma reint}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="¤#,##0.###;¤(#,##0.###-)">
+				<reportElement style="Titles" x="287" y="0" width="95" height="30" uuid="c4c1819e-3505-43a6-af5c-be3b95ac1c16"/>
+				<textElement markup="none"/>
+				<textFieldExpression><![CDATA[$V{suma ganancia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
